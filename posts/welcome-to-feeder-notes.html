@@ -1,1 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Why I'm writing this blog — Feeder Notes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0D1416; --surface:#141D20; --surface-2:#1A252A; --line:#263237;
+    --text:#E7EDEC; --text-dim:#8FA1A3; --copper:#C97A46; --live:#4FD1C5;
+    --mono:'IBM Plex Mono', monospace; --sans:'IBM Plex Sans', sans-serif;
+  }
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  body{ background:var(--bg); color:var(--text); font-family:var(--sans); line-height:1.65; -webkit-font-smoothing:antialiased; }
+  a{ color:inherit; }
+  .wrap{ max-width:760px; margin:0 auto; padding:0 28px; }
+  header{ position:sticky; top:0; z-index:50; background:rgba(13,20,22,0.9); backdrop-filter:blur(8px); border-bottom:1px solid var(--line); }
+  .nav{ display:flex; align-items:center; justify-content:space-between; padding:18px 0; max-width:1120px; margin:0 auto; padding-left:28px; padding-right:28px; }
+  .brand{ font-family:var(--mono); font-weight:600; font-size:15px; }
+  .brand small{ display:block; font-family:var(--sans); font-weight:400; font-size:11px; color:var(--text-dim); }
+  .back{ font-family:var(--mono); font-size:13px; color:var(--text-dim); }
+  .back:hover{ color:var(--live); }
 
+  .post-head{ padding:56px 0 32px; border-bottom:1px solid var(--line); }
+  .tag{ display:inline-flex; font-family:var(--mono); font-size:10.5px; letter-spacing:0.06em; text-transform:uppercase; color:var(--live); border:1px solid rgba(79,209,197,0.35); padding:3px 8px; border-radius:2px; margin-bottom:18px; }
+  h1{ font-family:var(--mono); font-weight:600; font-size:clamp(26px,4vw,38px); line-height:1.2; margin-bottom:16px; }
+  .meta-row{ display:flex; gap:18px; font-family:var(--mono); font-size:12px; color:var(--text-dim); }
+
+  .post-body{ padding:44px 0 80px; font-size:16.5px; }
+  .post-body p{ margin-bottom:22px; color:#D6DEDD; }
+  .post-body h2{ font-family:var(--mono); font-size:20px; margin:36px 0 14px; color:var(--text); }
+  .post-body ul{ margin:0 0 22px 22px; color:#D6DEDD; }
+  .post-body li{ margin-bottom:8px; }
+  .post-body strong{ color:var(--text); }
+
+  footer{ border-top:1px solid var(--line); padding:32px 0; }
+  .footer-row{ display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:14px; max-width:1120px; margin:0 auto; padding-left:28px; padding-right:28px; }
+  .footer-row p{ font-family:var(--mono); font-size:12px; color:var(--text-dim); }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav">
+    <div class="brand">FEEDER NOTES<small>power systems &amp; power electronics</small></div>
+    <a class="back" href="../index.html">← BACK TO HOME</a>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="post-head">
+    <span class="tag">Notebook</span>
+    <h1>Why I'm writing this blog</h1>
+    <div class="meta-row">
+      <span>ASHWIN</span>
+      <span>JUL 26, 2026</span>
+      <span>3 MIN READ</span>
+    </div>
+  </div>
+
+  <div class="post-body">
+    <p>I'm starting this as a first-year Electrical Engineering student at San José State University, mostly because I keep finding that I don't really understand a power systems or power electronics topic until I've tried to explain it in plain language. This blog is that process, made public.</p>
+
+    <h2>What this is</h2>
+    <p>Feeder Notes is a running notebook on power electronics and power systems — converters, transformers, protection, the grid, and the semiconductors underneath all of it. Some posts will be me working through a textbook concept for the first time. Others will be notes from a project, a datasheet I've been staring at, or something I built on a bench. I'd rather write things down clearly while I'm still learning them than wait until I feel like an expert.</p>
+
+    <h2>Why I'm
