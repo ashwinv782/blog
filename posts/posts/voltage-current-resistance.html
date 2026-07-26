@@ -1,1 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Voltage, Current, and Resistance — Feeder Notes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0D1416; --surface:#141D20; --surface-2:#1A252A; --line:#263237;
+    --text:#E7EDEC; --text-dim:#8FA1A3; --copper:#C97A46; --live:#4FD1C5;
+    --mono:'IBM Plex Mono', monospace; --sans:'IBM Plex Sans', sans-serif;
+  }
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  body{ background:var(--bg); color:var(--text); font-family:var(--sans); line-height:1.65; -webkit-font-smoothing:antialiased; }
+  a{ color:inherit; }
+  .wrap{ max-width:760px; margin:0 auto; padding:0 28px; }
+  header{ position:sticky; top:0; z-index:50; background:rgba(13,20,22,0.9); backdrop-filter:blur(8px); border-bottom:1px solid var(--line); }
+  .nav{ display:flex; align-items:center; justify-content:space-between; padding:18px 0; max-width:1120px; margin:0 auto; padding-left:28px; padding-right:28px; }
+  .brand{ font-family:var(--mono); font-weight:600; font-size:15px; }
+  .brand small{ display:block; font-family:var(--sans); font-weight:400; font-size:11px; color:var(--text-dim); }
+  .back{ font-family:var(--mono); font-size:13px; color:var(--text-dim); }
+  .back:hover{ color:var(--live); }
 
+  .post-head{ padding:56px 0 32px; border-bottom:1px solid var(--line); }
+  .tag{ display:inline-flex; font-family:var(--mono); font-size:10.5px; letter-spacing:0.06em; text-transform:uppercase; color:var(--live); border:1px solid rgba(79,209,197,0.35); padding:3px 8px; border-radius:2px; margin-bottom:18px; }
+  h1{ font-family:var(--mono); font-weight:600; font-size:clamp(26px,4vw,38px); line-height:1.2; margin-bottom:16px; }
+  .meta-row{ display:flex; gap:18px; font-family:var(--mono); font-size:12px; color:var(--text-dim); }
+
+  .post-body{ padding:44px 0 80px; font-size:16.5px; }
+  .post-body p{ margin-bottom:22px; color:#D6DEDD; }
+  .post-body h2{ font-family:var(--mono); font-size:20px; margin:36px 0 14px; color:var(--text); }
+  .post-body ul{ margin:0 0 22px 22px; color:#D6DEDD; }
+  .post-body li{ margin-bottom:8px; }
+  .post-body strong{ color:var(--text); }
+
+  .analogy-box{
+    background:var(--surface); border:1px solid var(--line); border-radius:4px;
+    padding:24px; margin:26px 0; display:flex; gap:20px; align-items:center; flex-wrap:wrap;
+  }
+  .analogy-box svg{ flex-shrink:0; width:150px; height:auto; }
+  .analogy-box .analogy-text{ flex:1; min-width:220px; font-size:14.5px; color:var(--text-dim); }
+  .analogy-box .analogy-text strong{ color:var(--text); }
+
+  .formula-box{
+    background:var(--surface-2); border:1px solid var(--copper); border-left-width:3px;
+    border-radius:3px; padding:18px 22px; margin:24px 0;
+    font-family:var(--mono); font-size:15px;
+  }
+  .formula-box .label{ font-size:11px; color:var(--text-dim); letter-spacing:0.06em; margin-bottom:6px; text-transform:uppercase; }
+  .formula-box .formula{ font-size:19px; color:var(--live); }
+
+  .example-box{
+    background:var(--surface); border:1px solid var(--line); border-radius:4px;
+    padding:20px 22px; margin:20px 0; font-size:14.5px;
+  }
+  .example-box .label{ font-family:var(--mono); font-size:11px; color:var(--copper); letter-spacing:0.06em; margin-bottom:10px; text-transform:uppercase; }
+  .example-box p{ margin-bottom:8px; }
+
+  table.compare{ width:100%; border-collapse:collapse; margin:24px 0; font-size:14.5px; }
+  table.compare th, table.compare td{ text-align:left; padding:10px 14px; border-bottom:1px solid var(--line); }
+  table.compare th{ font-family:var(--mono); font-size:11px; color:var(--copper); text-transform:uppercase; letter-spacing:0.05em; }
+  table.compare td:first-child{ font-family:var(--mono); color:var(--text); }
+
+  footer{ border-top:1px solid var(--line); padding:32px 0; }
+  .footer-row{ display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:14px; max-width:1120px; margin:0 auto; padding-left:28px; padding-right:28px; }
+  .footer-row p{ font-family:var(--mono); font-size:12px; color:var(--text-dim); }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav">
+    <div class="brand">FEEDER NOTES<small>power systems &amp; power electronics</small></div>
+    <a class="back" href="../index.html">← BACK TO HOME</a>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="post-head">
+    <span class="tag">Fundamentals</span>
+    <h1>Voltage, Current, and Resistance: the three ideas everything else builds on</h1>
+    <div class="meta-row">
+      <span>ASHWIN</span>
+      <span>JUL 26, 2026</span>
+      <span>6 MIN READ</span>
+    </div>
+  </div>
+
+  <div class="post-body">
+    <p>I'm starting completely from zero on power systems and power electronics, so before I write about anything more interesting — converters, transformers, the grid — I need to nail down the three ideas that everything else is built on: <strong>voltage</strong>, <strong>current</strong>, and <strong>resistance</strong>. This post is me working through them for the first time, in plain language.</p>
+
+    <h2>The water pipe analogy</h2>
+    <p>The most common way to build intuition for electricity is to compare it to water flowing through a pipe. It's not a perfect analogy, but it's good enough to get the three ideas straight.</p>
+
+    <div class="analogy-box">
+      <svg viewBox="0 0 140 120" fill="none">
+        <rect x="10" y="50" width="120" height="20" rx="4" stroke="#4FD1C5" stroke-width="2" fill="none"/>
+        <path d="M20 60 L110 60" stroke="#4FD1C5" stroke-width="2" stroke-dasharray="5 6"/>
+        <circle cx="20" cy="30" r="10" stroke="#C97A46" stroke-width="2" fill="none"/>
+        <path d="M20 20 L20 40 M15 25 L25 25" stroke="#C97A46" stroke-width="1.5"/>
+        <text x="20" y="18" text-anchor="middle" font-family="IBM Plex Mono" font-size="8" fill="#8FA1A3">PUMP</text>
+        <rect x="55" y="45" width="10" height="30" fill="none" stroke="#8FA1A3" stroke-width="2"/>
+        <text x="60" y="98" text-anchor="middle" font-family="IBM Plex Mono" font-size="8" fill="#8FA1A3">NARROW SECTION</text>
+      </svg>
+      <div class="analogy-text">
+        <p><strong>Voltage</strong> is like the pressure a pump creates.</p>
+        <p><strong>Current</strong> is like how much water actually flows through the pipe.</p>
+        <p><strong>Resistance</strong> is like a narrow section of pipe that pushes back against that flow.</p>
+      </div>
+    </div>
+
+    <p>More pump pressure pushes more water through. A narrower pipe makes it harder for water to get through at the same pressure. Electricity behaves the same way — just with charge instead of water, and wires instead of pipes.</p>
+
+    <h2>Voltage: the push</h2>
+    <p>Voltage is the electrical "pressure" that pushes charge through a circuit. It's measured in <strong>volts (V)</strong>. A 9V battery pushes harder than a 1.5V AA battery — it has more electrical pressure available. Voltage always exists <em>between two points</em>: a battery has a "+" and "−" terminal, and the voltage is the difference in pressure between them.</p>
+
+    <h2>Current: the flow</h2>
+    <p>Current is the actual movement of charge through a wire — how much is flowing, not how hard it's being pushed. It's measured in <strong>amperes</strong>, or "amps (A)." You can have a huge voltage pushing almost no current (like static shock from a doorknob — thousands of volts, but so little current it barely tingles), or a small voltage pushing a lot of current (like a car battery, which can deliver hundreds of amps at just 12V).</p>
+
+    <h2>Resistance: the pushback</h2>
+    <p>Resistance is whatever opposes the flow of current — measured in <strong>ohms (Ω)</strong>. Thin wires, long wires, and certain materials all resist current more than thick, short, highly conductive ones. A resistor is a component built specifically to add a known, controlled amount of resistance to a circuit.</p>
+
+    <h2>Ohm's Law: how the three connect</h2>
+    <p>These three aren't independent — they're locked together by one equation, Ohm's Law:</p>
+
+    <div class="formula-box">
+      <div class="label">Ohm's Law</div>
+      <div class="formula">V = I × R</div>
+    </div>
+
+    <p>In words: <strong>voltage equals current times resistance</strong>. If you know any two of the three, you can find the third. Rearranged, it also reads:</p>
+
+    <div class="formula-box">
+      <div class="label">Solving for current</div>
+      <div class="formula">I = V / R</div>
+    </div>
+
+    <p>This version is the intuitive one: for a fixed resistance, more voltage means more current flows. And for a fixed voltage, more resistance means less current flows. That's the entire relationship — everything else is just this equation applied to different situations.</p>
+
+    <div class="example-box">
+      <div class="label">Worked example</div>
+      <p>A 9V battery is connected across a 3Ω resistor. How much current flows?</p>
+      <p><strong>I = V / R = 9V / 3Ω = 3A</strong></p>
+      <p>Three amps of current flow through the circuit.</p>
+    </div>
+
+    <div class="example-box">
+      <div class="label">Worked example</div>
+      <p>A circuit has 2A of current flowing through a 5Ω resistor. What's the voltage across it?</p>
+      <p><strong>V = I × R = 2A × 5Ω = 10V</strong></p>
+    </div>
+
+    <h2>Power: where this connects to the rest of the blog</h2>
+    <p>Voltage and current together determine <strong>power</strong> — the actual rate of energy being delivered, measured in <strong>watts (W)</strong>. This is the equation that ties this post to literally everything else I'll write about here, because power systems and power electronics are, at the end of the day, about moving power around efficiently.</p>
+
+    <div class="formula-box">
+      <div class="label">Power</div>
+      <div class="formula">P = V × I</div>
+    </div>
+
+    <p>A 100W light bulb running on 120V draws about 0.83A of current (from I = P / V). A phone charger delivering 5V at 2A is supplying 10W. Every future post — why the grid runs at high voltage, how a charger converts power, why transformers exist — is really just this equation showing up in a different context.</p>
+
+    <table class="compare">
+      <tr><th>Quantity</th><th>Symbol</th><th>Unit</th><th>Analogy</th></tr>
+      <tr><td>Voltage</td><td>V</td><td>Volts (V)</td><td>Water pressure</td></tr>
+      <tr><td>Current</td><td>I</td><td>Amps (A)</td><td>Water flow rate</td></tr>
+      <tr><td>Resistance</td><td>R</td><td>Ohms (Ω)</td><td>Pipe narrowness</td></tr>
+      <tr><td>Power</td><td>P</td><td>Watts (W)</td><td>How much work the water does</td></tr>
+    </table>
+
+    <h2>What's next</h2>
+    <p>With these four ideas in place, I can start writing about things that are actually interesting — starting with why the power grid runs on alternating current instead of direct current, which was one of the first real fights in the history of electrical engineering.</p>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-row">
+    <p>© 2026 FEEDER NOTES — WRITTEN BY ASHWIN</p>
+    <a class="back" href="../index.html">← BACK TO HOME</a>
+  </div>
+</footer>
+
+</body>
+</html>
